@@ -1,0 +1,128 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.select2{
+    width: 100%!important;
+    font-size: 0.875rem;
+    line-height: 1.5rem;
+    color: rgb(17 24 39);
+}
+
+.select2-container--default .select2-selection--multiple{
+    border: unset!important;
+    border-radius: unset!important;
+}
+
+.select2-container .select2-search--inline .select2-search__field{
+    height: 26px!important;
+}
+
+.select2-container--default .select2-selection--multiple .select2-selection__choice{
+    font-size: 12px;
+}
+
+#tagsContainer{
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 15px;
+}
+
+#tagsContainer>span{
+    display: flex;
+    margin-left: 5px;
+    align-items: center;
+    padding: 3px 5px;
+    background-color: #e4e4e4;
+    border: 1px solid #aaa;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-bottom: 4px;
+    font-size: 12px;
+}
+
+#tagsContainer>span:hover{
+    background-color: #eee;
+}
+
+#tagsContainer>span::before {
+    content: "";
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    background-color: #999;
+    -webkit-mask-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>');
+    mask-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>');
+    mask-size: contain;
+    mask-repeat: no-repeat;
+    margin-right: 3px;
+}
+
+#tagsContainer>span:hover::before{
+    background-color: #000;
+}
+.post-title{
+    font-size: 20px!important;
+}
+
+.post-content code{
+    white-space: initial!important;
+}
+
+/*Toastr notifications styles*/
+#toast-container > div {
+    background: none !important;
+    box-shadow: none !important;
+    border: none !important;
+    padding: 0 !important;
+}
+
+.custom-toast-container {
+    width: auto !important;
+    max-width: 300px !important;
+    background: none !important;
+    box-shadow: none !important;
+}
+/*End Toastr notifications styles*/
+.comments-list>div{
+    position: relative;
+}
+
+.comments-list>div:before{
+    content: '';
+    position: absolute;
+    z-index: 1;
+    left: 15px;
+    top: 15px;
+    border-left: 1px solid #e5e7eb;
+    width: 1px;
+    height: 100%;
+    background-color: transparent;
+}
+
+.comments-list>div:last-child:before{
+    display: none;
+}
+
+.comments-list>*{
+    z-index: 2;
+}
+
+.comments-table td{
+    position: relative;
+}
+
+.comments-table .unapprove{
+    position: absolute;
+    width: 3px;
+    height: 100%;
+    display: block;
+    top: 0;
+    left: 0;
+    z-index: 9;
+    background-color: red;
+}
+
+.comments-table .unapprove .comment-text{
+    font-weight: 700;
+}

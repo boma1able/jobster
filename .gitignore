@@ -1,0 +1,25 @@
+# Laravel специфічні файли
+/vendor
+/node_modules
+/storage
+/bootstrap/cache
+/public/storage
+/.env
+/.env.*.local
+
+.DS_Store
+
+/phpunit.xml
+
+.vscode/
+.idea/
+*.iml
+
+*.log
+*.sql
+*.sqlite
+
+composer.lock
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
