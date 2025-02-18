@@ -2,7 +2,7 @@
 
 <article class="flex max-w-xl flex-col items-start justify-between group">
     <a href="{{ route('blog.show', $post->slug) }}" class="w-full h-[220px] mb-4 overflow-hidden rounded-lg transition-all duration-500">
-        <img src="{{ asset('storage/' . $post->featured_img) }}" alt="image" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+        <img src="{{ asset('storage/media/' . $post->featured_img) }}" alt="image" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
     </a>
     <div class="flex items-center gap-x-4 text-xs">
         <time datetime="2020-03-16" class="text-gray-500">{{ $post->created_at->format('d M, Y') }}</time>

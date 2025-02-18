@@ -3,21 +3,23 @@
 use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\BlogController;
-use App\Http\Controllers\CategoryController;
-use App\Http\Controllers\CommentController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\JobController;
-use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RegisterUserController;
 use App\Http\Controllers\SessionController;
-use App\Http\Controllers\TagController;
 use App\Http\Controllers\TaxonomyCatController;
 use App\Http\Controllers\TaxonomyTagController;
-use App\Http\Controllers\UserController;
+use App\Livewire\Dashboard\Categories;
+use App\Livewire\Dashboard\Comments\Comments;
+use App\Livewire\Dashboard\Posts;
+use App\Livewire\Dashboard\Tags;
+use App\Livewire\Dashboard\Users\CreateUser;
+use App\Livewire\Dashboard\Users\EditUser;
 use App\Http\Middleware\CheckIfAdmin;
 use App\Http\Middleware\CheckUserRole;
 use App\Http\Middleware\UpdateLastActive;
+use App\Livewire\Dashboard\Users\Users;
 use App\Models\User;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Session;
@@ -31,29 +33,26 @@ Route::get('/', function () {
 Route::middleware(['auth', 'not-subscriber', UpdateLastActive::class])->prefix('dashboard')->name('dashboard.')->group(function () {
 
     Route::get('/', [DashboardController::class, 'index'])->name('index');
-    Route::resource('categories', CategoryController::class);
-    Route::resource('tags', TagController::class);
-    Route::resource('posts', PostController::class);
-    Route::delete('/dashboard/posts/{post}', [PostController::class, 'destroy'])->name('dashboard.posts.destroy');
 
-    Route::resource('users', UserController::class);
+    Route::get('/posts', Posts::class)->name('posts');
+    Route::get('/categories', Categories::class)->name('categories');
+    Route::get('/tags', Tags::class)->name('tags');
+    Route::get('/comments', Comments::class)->name('comments');
+
+    Route::get('/users', Users::class)->name('users');
+    Route::get('/users/{user}/edit', EditUser::class)->name('users.edit');
+    Route::get('/users/create', CreateUser::class)->name('users.create');
 
     Route::get('/jobs', [JobController::class, 'index'])->name('jobs');
 
-    Route::resource('comments', CommentController::class);
-    Route::post('comments/{id}/approve', [CommentController::class, 'approve'])->name('comments.approve');
-    Route::post('comments/{id}/reject', [CommentController::class, 'reject'])->name('comments.reject');
-
     Route::get('/user/{id}', [ProfileController::class, 'show'])->name('profile.show');
-
-    Route::get('/{any}', function ($any) {
-        return view('dashboard.' . $any);
-    })->where('any', '.*')->name('dynamic');
 });
 
+
+
 Route::middleware(['auth', CheckIfAdmin::class])->group(function () {
-    Route::get('/dashboard/users/create', [UserController::class, 'create'])->name('dashboard.users.create');
-    Route::post('/dashboard/users', [UserController::class, 'store'])->name('dashboard.users.store');
+//    Route::get('/dashboard/users/create', [UserController::class, 'create'])->name('dashboard.users.create');
+//    Route::post('/dashboard/users', [UserController::class, 'store'])->name('dashboard.users.store');
 });
 
 Route::middleware(['auth'])->group(function () {
@@ -70,9 +69,6 @@ Route::get('/blog', [BlogController::class, 'index']);
 Route::get('/blog/{slug}', [BlogController::class, 'show'])->name('blog.show');
 Route::get('category/{category:slug}', [TaxonomyCatController::class, 'show'])->name('category');
 Route::get('tag/{tag:slug}', [TaxonomyTagController::class, 'show'])->name('tag');
-
-Route::post('posts/{post}/comments', [CommentController::class, 'store'])->name('comments.store')->middleware('auth');
-Route::get('blog/{post:slug}', [PostController::class, 'show'])->name('posts.show');
 
 Route::get('/register', [RegisterUserController::class, 'create']);
 Route::post('/register', [RegisterUserController::class, 'store']);

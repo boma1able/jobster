@@ -2,60 +2,49 @@ import $ from 'jquery';
 import './bootstrap';
 import './deleteModal';
 import './userAvatar';
-import select2 from 'select2';
-select2();
-import 'select2/dist/css/select2.css';
 import './featured_img'
 
-//Post category select placeholder
-$(document).ready(function() {
-    $('.select2').select2({
-        placeholder: "Search for category...",
-        allowClear: true,
-    });
-});
+Livewire.on('showToast', (data) => {
 
-//Post tag add/select func
-document.addEventListener("DOMContentLoaded", function () {
-    let tags = [];
-    const tagInput = document.getElementById("tagInput");
-    const tagsContainer = document.getElementById("tagsContainer");
-    const tagsField = document.getElementById("tagsField");
+    const message = data.message;
 
-    document.querySelectorAll(".tag").forEach(tagElement => {
-        const tagText = tagElement.getAttribute("data-name");
-        if (!tags.includes(tagText)) {
-            tags.push(tagText);
-        }
-    });
-
-    updateTagsUI();
-
-    tagInput.addEventListener("keydown", function (event) {
-        if (event.key === "Enter" && tagInput.value.trim() !== "") {
-            event.preventDefault();
-            const tagText = tagInput.value.trim();
-            if (!tags.includes(tagText)) {
-                tags.push(tagText);
-                updateTagsUI();
-            }
-            tagInput.value = "";
-        }
-    });
-
-    function updateTagsUI() {
-        tagsContainer.innerHTML = "";
-        tags.forEach(tag => {
-            const tagElement = document.createElement("span");
-            tagElement.textContent = tag;
-            tagElement.classList.add("tag");
-            tagElement.addEventListener("click", function () {
-                tags = tags.filter(t => t !== tag);
-                updateTagsUI();
-            });
-            tagsContainer.appendChild(tagElement);
-        });
-        tagsField.value = tags.join(",");
+    if (typeof message !== 'string') {
+        console.error('Expected a string, but received:', message);
+        return;
     }
+    toastr.options = {
+        closeButton: false,
+        progressBar: false,
+        timeOut: 3000,
+        // extendedTimeOut: 1000,
+        positionClass: "toast-bottom-right",
+        showMethod: "slideDown",
+        hideMethod: "slideUp",
+        showDuration: 400,
+        hideDuration: 400,
+        escapeHtml: false,
+        preventDuplicates: true,
+    };
+
+    toastr.success(`
+        <div class="bg-white border border-gray-300 rounded-[8px] px-4 py-4 shadow-lg">
+            <div class="flex">
+                <div class="w-5">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="#05df72" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"></path>
+                    </svg>
+                </div>
+                <div class="mx-3 w-[250px]">
+                    <p class="text-gray-800 text-[14px] lh-[20px]">Success!</p>
+                    <p class="text-gray-500 text-xs pt-1">${message}</p>
+                </div>
+                <div class="w-5 toast-close">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="#99a1af" aria-hidden="true" class="pointer">
+                        <path d="M6.28 5.22a.75.75 0 0 0-1.06 1.06L8.94 10l-3.72 3.72a.75.75 0 1 0 1.06 1.06L10 11.06l3.72 3.72a.75.75 0 1 0 1.06-1.06L11.06 10l3.72-3.72a.75.75 0 0 0-1.06-1.06L10 8.94 6.28 5.22Z"></path>
+                    </svg>
+                </div>
+            </div>
+        </div>
+    `, '');
 });
 

@@ -19,7 +19,7 @@
                             <x-form.label for="email">Email address</x-form.label>
 
                             <div class="mt-1">
-                                <div class="flex items-center rounded-md bg-white px-3 outline-1 -outline-offset-1 outline-gray-300 focus-within:outline-2 focus-within:-outline-offset-2 focus-within:outline-indigo-600">
+                                <div class="flex items-center rounded-md overflow-hidden bg-white">
                                     <x-form.input type="email" name="email" id="email" :value="old('email')" required/>
                                 </div>
                                 <x-form.error name="email"/>
@@ -36,9 +36,8 @@
                                 </div>
                             </div>
 
-
                             <div class="mt-1">
-                                <div class="flex items-center rounded-md bg-white px-3 outline-1 -outline-offset-1 outline-gray-300 focus-within:outline-2 focus-within:-outline-offset-2 focus-within:outline-indigo-600">
+                                <div class="flex items-center rounded-md overflow-hidden bg-white">
                                     <x-form.input type="password" name="password" id="password" required/>
                                 </div>
                                 <x-form.error name="password"/>

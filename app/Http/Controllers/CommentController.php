@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Comment;
+use App\Models\Post;
 use Illuminate\Http\Request;
 use function Symfony\Component\HttpFoundation\Session\Storage\Proxy\destroy;
 
@@ -11,30 +12,29 @@ class CommentController extends Controller
 
     public function index(Request $request)
     {
+
         $search = $request->get('search');
 
-        $comments = Comment::with('user')
-        ->when($request->has('user_comments') && $request->user_comments, function ($query) {
-            return $query->where('user_id', auth()->id());
-        })
-            ->when($request->has('pending'), function ($query) {
-                return $query->where('approved', false);
-            })
-            ->when($request->has('approved'), function ($query) {
-                return $query->where('approved', true);
-            })
+        $posts = Comment::with('user')
             ->when($search, function ($query) use ($search) {
-                return $query->where('content', 'like', '%' . $search . '%')
-                    ->orWhereHas('user', function ($q) use ($search) {
-                        $q->where('name', 'like', '%' . $search . '%');
-                    });
-            })
-            ->latest()
-            ->paginate(10);
+                return $query->where('content', 'like', '%' . $search . '%');
+            })->latest()->paginate(10);
 
-        return view('dashboard.comments.index', compact('comments', 'search'));
+        if ($request->has('user_comments') && $request->user_comments) {
+            $comments = Comment::where('user_id', auth()->id())->latest()->get();
+        }
+        elseif($request->has('pending')) {
+            $comments = Comment::where('approved', false)->latest()->get();
+        }
+        elseif($request->has('approved')) {
+            $comments = Comment::where('approved', true)->latest()->get();
+        }
+        else {
+            $comments = Comment::latest()->paginate(9);
+        }
+
+        return view('dashboard.comments.index', compact('comments', 'posts'));
     }
-
 
     public function approve($id)
     {

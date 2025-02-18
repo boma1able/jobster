@@ -7,8 +7,8 @@
         </div>
     </div>
 
-    <nav class="mt-6">
-        <x-nav-link-dash href="/dashboard" icon="1" active="{{ request()->is('dashboard') ? 'active' : '' }}">
+    <nav class="flex flex-col mt-6 [min-height:calc(100vh-110px)]">
+        <x-nav-link-dash href="/dashboard" icon="1" wire:navigate active="{{ request()->is('dashboard') ? 'active' : '' }}">
             Dashboard
         </x-nav-link-dash>
 
@@ -25,25 +25,23 @@
                     );
             @endphp
 
-            <x-nav-link-dash href="/dashboard/posts" icon="3" active="{{ $isPostsActive ? 'active' : '' }}">
+            <x-nav-link-dash href="/dashboard/posts" icon="3" wire:navigate active="{{ $isPostsActive ? 'active' : '' }}">
                 Posts
             </x-nav-link-dash>
 
             @if($isPostsActive)
                 <div class="left-0 space-y-2 w-full bg-gray-700 pl-[36px]">
-                    <x-nav-child-link href="/dashboard/posts/" active="{{ request()->is('dashboard/posts') ? 'active' : '' }}">All Posts</x-nav-child-link>
-                    <x-nav-child-link href="/dashboard/posts/create" active="{{ request()->is('dashboard/posts/create') ? 'active' : '' }}">Add new</x-nav-child-link>
-                    <x-nav-child-link href="/dashboard/categories" active="{{ request()->is('dashboard/categories', 'dashboard/categories/*/edit', 'dashboard/categories/create') ? 'active' : '' }}">Categories</x-nav-child-link>
-                    <x-nav-child-link href="/dashboard/tags" active="{{ request()->is('dashboard/tags', 'dashboard/tags/*/edit', 'dashboard/tags/create') ? 'active' : '' }}">Tags</x-nav-child-link>
+                    <x-nav-child-link href="/dashboard/posts/" wire:navigate active="{{ request()->is('dashboard/posts') ? 'active' : '' }}">All Posts</x-nav-child-link>
+                    <x-nav-child-link href="/dashboard/posts" wire:navigate wire:current="/dashboard/posts?view=create" active="{{ request()->is('dashboard/posts?view=create') ? 'active' : '' }}">Add new</x-nav-child-link>
+                    <x-nav-child-link href="/dashboard/categories" wire:navigate active="{{ request()->is('dashboard/categories', 'dashboard/categories/*/edit', 'dashboard/categories/create') ? 'active' : '' }}">Categories</x-nav-child-link>
+                    <x-nav-child-link href="/dashboard/tags" wire:navigate active="{{ request()->is('dashboard/tags', 'dashboard/tags/*/edit', 'dashboard/tags/create') ? 'active' : '' }}">Tags</x-nav-child-link>
                 </div>
             @endif
         </div>
 
-        <x-nav-link-dash href="/dashboard/comments" icon="5" active="{{ request()->is('dashboard/comments', 'dashboard/comments/*/edit') ? 'active' : '' }}">
+        <x-nav-link-dash href="/dashboard/comments" icon="5" wire:navigate active="{{ request()->is('dashboard/comments', 'dashboard/comments/*/edit') ? 'active' : '' }}">
             Comments
-            @if ($pending > 0)
-                <span class="badge flex w-[18px] h-[18px] text-[10px] justify-center text-center  rounded-full bg-red-500 text-white ml-2 leading-[17px]">{{ $pending }}</span>
-            @endif
+            <livewire:dashboard.comments.new-comments-counter />
         </x-nav-link-dash>
 
         <div class="relative">
@@ -54,24 +52,41 @@
                     );
             @endphp
 
-            <x-nav-link-dash href="/dashboard/users" icon="4" active="{{ $isActive ? 'active' : '' }}">
+            <x-nav-link-dash href="/dashboard/users" icon="4" wire:navigate active="{{ $isActive ? 'active' : '' }}">
                 Users
             </x-nav-link-dash>
 
             @if($isActive)
                 <div class="left-0 space-y-2 w-full bg-gray-700 pl-[36px]">
-                    <x-nav-child-link href="/dashboard/users/" active="{{ request()->is('dashboard/users') ? 'active' : '' }}">
+                    <x-nav-child-link href="/dashboard/users/" wire:navigate active="{{ request()->is('dashboard/users') ? 'active' : '' }}">
                         All Users
                     </x-nav-child-link>
-                    <x-nav-child-link href="/dashboard/users/create" active="{{ request()->is('dashboard/users/create') ? 'active' : '' }}">
+                    <x-nav-child-link href="/dashboard/users/create" wire:navigate active="{{ request()->is('dashboard/users/create') ? 'active' : '' }}">
                         Add New
                     </x-nav-child-link>
-                    <x-nav-child-link href="/dashboard/user/{{ $user->id }}" active="{{ request()->is('dashboard/user/*') ? 'active' : '' }}">
+                    <x-nav-child-link href="/dashboard/user/{{ $user->id }}" wire:navigate active="{{ request()->is('dashboard/user/*') ? 'active' : '' }}">
                         Your Profile
                     </x-nav-child-link>
                 </div>
             @endif
         </div>
+
+        <x-nav-link class="block px-6 !mt-auto" style="background-color: unset;">
+            <form action="/logout" method="POST">
+                @csrf
+                <button title="Logout!" class="flex items-center">
+                    <span class="flex w-8 h-8 overflow-hidden rounded-full mr-3">
+                        <img src="{{ auth()->user()->avatar ? asset('storage/' . auth()->user()->avatar) : asset('/storage/default-avatar.jpg') }}"
+                             alt="User Avatar" class="w-full h-full object-cover">
+                    </span>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
+                        <polyline points="16 17 21 12 16 7"/>
+                        <line x1="21" y1="12" x2="9" y2="12"/>
+                    </svg>
+                </button>
+            </form>
+        </x-nav-link>
     </nav>
 
 

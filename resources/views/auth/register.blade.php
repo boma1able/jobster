@@ -19,7 +19,7 @@
                             <x-form.label>Your Name</x-form.label>
 
                             <div class="mt-1">
-                                <div class="flex items-center rounded-md bg-white px-3 outline-1 -outline-offset-1 outline-gray-300 focus-within:outline-2 focus-within:-outline-offset-2 focus-within:outline-indigo-600">
+                                <div class="flex items-center rounded-md bg-white overflow-hidden">
                                     <x-form.input name="name" id="name" :value="old('name')"/>
                                 </div>
                                 <x-form.error name="name"/>
@@ -32,7 +32,7 @@
                             <x-form.label>Email address</x-form.label>
 
                             <div class="mt-1">
-                                <div class="flex items-center rounded-md bg-white px-3 outline-1 -outline-offset-1 outline-gray-300 focus-within:outline-2 focus-within:-outline-offset-2 focus-within:outline-indigo-600">
+                                <div class="flex items-center rounded-md bg-white overflow-hidden">
                                     <x-form.input type="email" name="email" id="email" :value="old('email')" required/>
                                 </div>
                                 <x-form.error name="email"/>
@@ -45,7 +45,7 @@
                             <x-form.label>Password</x-form.label>
 
                             <div class="mt-1">
-                                <div class="flex items-center rounded-md bg-white px-3 outline-1 -outline-offset-1 outline-gray-300 focus-within:outline-2 focus-within:-outline-offset-2 focus-within:outline-indigo-600">
+                                <div class="flex items-center rounded-md bg-white overflow-hidden">
                                     <x-form.input type="password" name="password" id="password" required/>
                                 </div>
                                 <x-form.error name="password"/>
@@ -58,7 +58,7 @@
                             <x-form.label>Password Confirm</x-form.label>
 
                             <div class="mt-1">
-                                <div class="flex items-center rounded-md bg-white px-3 outline-1 -outline-offset-1 outline-gray-300 focus-within:outline-2 focus-within:-outline-offset-2 focus-within:outline-indigo-600">
+                                <div class="flex items-center rounded-md bg-white overflow-hidden">
                                     <x-form.input type="password" name="password_confirmation" id="password_confirmation" required/>
                                 </div>
                                 <x-form.error name="password_confirmation"/>
