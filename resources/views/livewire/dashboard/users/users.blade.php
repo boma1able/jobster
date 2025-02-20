@@ -18,7 +18,7 @@
     @endif
 
     <div class="mb-10">
-        <a href="{{ route('dashboard.users.create') }}" wire:navigate  class="bg-blue-500 text-white p-2 rounded">Add new</a>
+        <a href="{{ route('dashboard.users.create') }}" wire:navigate  class="inline-block rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-xs">Add new</a>
     </div>
 
     <div class="overflow-x-auto bg-white shadow-md rounded-lg">
@@ -30,6 +30,9 @@
                 <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Email</th>
                 <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                     <p class="flex justify-center">Posts</p>
+                </th>
+                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    <p class="flex justify-center">Jobs</p>
                 </th>
                 <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Role</th>
                 <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"><p class="flex justify-center">Status</p></th>
@@ -59,6 +62,11 @@
                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                         <p class="flex justify-center">
                             {{ $user->post->count() }}
+                        </p>
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                        <p class="flex justify-center">
+                            {{ $user->jobs->count() }}
                         </p>
                     </td>
                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">

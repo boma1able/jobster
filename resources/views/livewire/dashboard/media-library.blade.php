@@ -9,10 +9,6 @@
         </x-slot:title>
     </x-dashboard.page-title>
 
-    <div class="w-full flex justify-end mb-6 p-1 border-b text-xs text-gray-500">
-        Show <span class="mx-1">{{ $loadedCount }}</span>of<span class="ml-1">{{ $totalCount }}</span>
-    </div>
-
     <div class="flex flex-wrap gap-5">
         @foreach($images as $image)
             @php
@@ -31,11 +27,16 @@
             </div>
         @endforeach
     </div>
-    @if($loadedCount < $totalCount)
-        <div class="w-full mt-4 text-center">
-            <button wire:click="loadMore" class="inline-block rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-xs">
-                Load more
-            </button>
+    <div class="max-w-[1000px]">
+        <div class="w-full flex justify-center my-4 p-1 text-xs text-gray-500">
+            Showing <span class="mx-1">{{ $loadedCount }}</span>of<span class="mx-1">{{ $totalCount }}</span>media items
         </div>
-    @endif
+        @if($loadedCount < $totalCount)
+            <div class="w-full mt-4 text-center">
+                <button wire:click="loadMore" class="mb-8 inline-block rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 cursor-pointer">
+                    Load more
+                </button>
+            </div>
+        @endif
+    </div>
 </div>

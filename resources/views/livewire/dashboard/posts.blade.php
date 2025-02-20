@@ -214,7 +214,7 @@
                                                         <a href="{{ url('blog') . '/' . $post->slug }}" class="font-semibold hover:underline">{{ $post->title }}</a>
                                                         <span class="flex flex-wrap mt-2 space-x-3">
                                                             <button wire:click="edit({{ $post->id }})" class="text-gray-400 text-xxs">Edit</button>
-                                                            <button wire:click="delete({{ $post->id }})" class="text-red-400 text-xxs">Delete</button>
+                                                            <a href="#" wire:click.prevent="confirmDelete({{ $post->id }})" class="text-red-400 text-xxs">Delete</a>
                                                         </span>
                                                     </td>
                                                     <td class="px-4 py-4 text-xxs font-medium text-gray-500 min-w-[107px]">
@@ -256,5 +256,7 @@
             </div>
         @endif
     </div>
-
+    @if ($showDeleteConfirmation)
+        <x-dashboard.modal.delete :title="$modal_title" :sub="$sub" :postToDelete="$postToDelete" :current="$postToDelete"/>
+    @endif
 </div>

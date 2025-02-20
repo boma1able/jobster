@@ -7,6 +7,10 @@ use App\Models\User;
 class Users extends Component
 {
     public $users;
+    public $showDeleteConfirmation = false;
+    public $userToDelete = null;
+    public $title = 'Delete!';
+    public $sub = 'Are you sure you want to delete this user?';
 
     public function mount()
     {
@@ -18,18 +22,13 @@ class Users extends Component
         return redirect()->route('dashboard.users.index', $this->user->id)->with('success', "User " . e($this->user->name) . " was successfully updated!");
     }
 
-    public $showDeleteConfirmation = false;
-    public $userToDelete = null;
-    public $title = 'Delete!';
-    public $sub = 'Are you sure you want to delete this user?';
-
     public function confirmDelete($userId)
     {
         $this->showDeleteConfirmation = true;
         $this->userToDelete = $userId;
     }
 
-    public function deleteUser($userId)
+    public function delete($userId)
     {
         $user = User::findOrFail($userId);
 
@@ -45,8 +44,7 @@ class Users extends Component
 
         session()->flash('success', "User " . e($userName) . " was successfully deleted!");
         $this->showDeleteConfirmation = false;
-        return $this->redirectRoute('dashboard.users', navigate: true);
-}
+    }
 
     public function cancelDelete()
     {
@@ -56,7 +54,9 @@ class Users extends Component
 
     public function render()
     {
-        return view('livewire.dashboard.users.users');
+        return view('livewire.dashboard.users.users', [
+            'users' => User::with('jobs')->get()
+        ]);
     }
 }
 

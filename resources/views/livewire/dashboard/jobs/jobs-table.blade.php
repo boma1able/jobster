@@ -41,9 +41,9 @@
                             <button wire:click.prevent="redirectToEdit({{ $result->id }})" class="text-gray-400 text-xxs">
                                 Edit
                             </button>
-                            <button wire:click.prevent="delete({{ $result->id }})"  class="text-red-400 text-xxs">
+                            <a href="#" wire:click.prevent="confirmDelete({{ $result->id }})"  class="text-red-400 text-xxs">
                                 Delete
-                            </button>
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -56,5 +56,8 @@
     <div class="mt-6">
         {{ $this->results->links() }}
     </div>
-
+    @if ($showDeleteConfirmation)
+        <x-dashboard.modal.delete :title="$modal_title" :sub="$sub" :jobToDelete="$jobToDelete" :current="$jobToDelete"/>
+    @endif
 </div>
+

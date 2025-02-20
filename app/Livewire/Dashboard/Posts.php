@@ -22,6 +22,11 @@ class Posts extends Component
     public $featured_img = '';
     public $tag = '';
 
+    public $showDeleteConfirmation = false;
+    public $postToDelete = null;
+    public $modal_title = 'Deleting post!';
+    public $sub = 'Are you sure you want to delete this post?';
+
     public function mount(Post $post)
     {
         $this->post = $post;
@@ -136,7 +141,7 @@ class Posts extends Component
         if ($this->postId == $id) {
             $this->resetInput();
         }
-
+        $this->showDeleteConfirmation = false;
         $this->resetPage();
     }
 
@@ -152,9 +157,16 @@ class Posts extends Component
         $this->isCreating = false;
     }
 
-    public function cancel()
+    public function confirmDelete($postId)
     {
-        $this->resetInput();
+        $this->showDeleteConfirmation = true;
+        $this->postToDelete = $postId;
+    }
+
+    public function cancelDelete()
+    {
+        $this->showDeleteConfirmation = false;
+        $this->postToDelete = null;
     }
 
     public function render()

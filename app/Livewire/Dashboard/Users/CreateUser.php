@@ -28,7 +28,7 @@ class CreateUser extends Component
 
         $validated['password'] = Hash::make($this->password);
 
-        $user = Job::create($validated);
+        $user = User::create($validated);
 
         if (isset($validated['role'])) {
             $user->roles()->sync([$validated['role']]);

@@ -18,6 +18,11 @@ class JobsTable extends Component
     public string $field;
     public ?string $route;
 
+    public $showDeleteConfirmation = false;
+    public $jobToDelete = null;
+    public $modal_title = 'Deleting job!';
+    public $sub = 'Are you sure you want to delete this job?';
+
     public function mount(string $model, string $field = 'title', ?string $route = null)
     {
         $this->model = "App\\Models\\{$model}";
@@ -60,13 +65,25 @@ class JobsTable extends Component
         return $this->redirectRoute('dashboard.jobs.manage', ['id' => $id], navigate: true);
     }
 
+    public function confirmDelete($postId)
+    {
+        $this->showDeleteConfirmation = true;
+        $this->jobToDelete = $postId;
+    }
+
+    public function cancelDelete()
+    {
+        $this->showDeleteConfirmation = false;
+        $this->jobToDelete = null;
+    }
+
     public function delete($id)
     {
         $job = Job::findOrFail($id);
         $job->delete();
-
+        $this->showDeleteConfirmation = false;
         $this->dispatch('showToast', message: 'Job deleted successfully!');
-}
+    }
 
     public function render()
     {
