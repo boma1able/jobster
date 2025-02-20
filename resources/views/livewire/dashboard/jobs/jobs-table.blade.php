@@ -24,7 +24,7 @@
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-6">
             @forelse($this->results as $result)
                 <div class="bg-white p-6 rounded-lg shadow-md flex items-center justify-between">
-                    <div class="flex flex-wrap h-full">
+                    <div class="flex flex-wrap w-full h-full">
                         <div class="flex items-center space-x-4 mb-4">
                             <img class="h-14 w-14 rounded-full object-cover" src="{{ asset('storage/company/' . $result->company_logo) }}" alt="{{ $result->company_name }}">
 

@@ -58,7 +58,9 @@
                         </div>
                     @endif
                 </div>
-
+                @error('logo_obj')
+                    <span class="text-red-500 text-xs">{{ $message }}</span>
+                @enderror
             </div>
 
         </x-form.field>

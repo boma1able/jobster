@@ -1,8 +1,6 @@
 import $ from 'jquery';
 import './bootstrap';
 import './deleteModal';
-import './userAvatar';
-import './featured_img'
 
 Livewire.on('showToast', (data) => {
 

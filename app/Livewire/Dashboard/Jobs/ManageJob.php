@@ -59,7 +59,7 @@ class ManageJob extends Component
             'title'         => 'required|min:3',
             'description'   => 'required',
             'company_name'  => 'required',
-            'logo_obj'      => $this->logo_obj ? 'image|max:1024|mimes:jpg,jpeg,png,gif,webp' : '',
+            'logo_obj'      => $this->logo_obj ? 'nullable|image|max:1024|mimes:jpg,jpeg,png,gif,webp' : '',
         ]);
 
         if ($this->logo_obj) {
@@ -82,7 +82,7 @@ class ManageJob extends Component
             'description' => $this->description,
             'company_name' => $this->company_name,
             'user_id'       => auth()->id(),
-            'company_logo'  => $this->company_logo
+            'company_logo'  => $this->company_logo ?? '',
         ]);
 
         $message = $this->id ? 'Job updated!' : 'Job created!';

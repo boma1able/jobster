@@ -50,7 +50,7 @@ Route::middleware(['auth', 'not-subscriber', UpdateLastActive::class])->prefix('
 
     Route::get('/user/{id}', [ProfileController::class, 'show'])->name('profile.show');
 
-    Route::get('/media', MediaLibrary::class)->name('media-library');
+    Route::get('/media', MediaLibrary::class)->name('media');
 });
 
 
