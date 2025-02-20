@@ -1,6 +1,7 @@
 <?php
 namespace App\Livewire\Dashboard\Users;
 
+use App\Models\Job;
 use Livewire\Component;
 use App\Models\User;
 use App\Models\Role;
@@ -27,7 +28,7 @@ class CreateUser extends Component
 
         $validated['password'] = Hash::make($this->password);
 
-        $user = User::create($validated);
+        $user = Job::create($validated);
 
         if (isset($validated['role'])) {
             $user->roles()->sync([$validated['role']]);
@@ -35,6 +36,16 @@ class CreateUser extends Component
 
         session()->flash('success', "User " . e($user->name) . " was successfully create!");
         return $this->redirectRoute('dashboard.users', navigate: true);
+    }
+
+    public function delete($id)
+    {
+        Job::findOrFail($id)->delete();
+        $this->dispatch('showToast', message: 'Job deleted!');
+
+        if ($this->categoryId == $id) {
+            $this->resetInput();
+        }
     }
 
     public function render()

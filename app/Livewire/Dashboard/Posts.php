@@ -29,13 +29,6 @@ class Posts extends Component
         $this->tags = [];
     }
 
-    public function render()
-    {
-        return view('livewire.dashboard.posts', [
-            'posts' => Post::latest()->paginate(5)
-        ]);
-    }
-
     public function removeImage()
     {
         $this->featured_img = null;
@@ -66,9 +59,9 @@ class Posts extends Component
     public function store()
     {
         $this->validate([
-            'title' => 'required|unique:posts,title,' . $this->postId,
-            'content' => 'nullable|string',
-            'featured_obj' => $this->featured_obj ? 'image|max:1024' : '',
+            'title'         => 'required|unique:posts,title,' . $this->postId,
+            'content'       => 'nullable|string',
+            'featured_obj'  => $this->featured_obj ? 'image|max:1024' : '',
         ]);
 
         if ($this->featured_obj) {
@@ -162,5 +155,12 @@ class Posts extends Component
     public function cancel()
     {
         $this->resetInput();
+    }
+
+    public function render()
+    {
+        return view('livewire.dashboard.posts', [
+            'posts' => Post::latest()->paginate(5)
+        ]);
     }
 }

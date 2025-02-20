@@ -12,6 +12,14 @@
             Dashboard
         </x-nav-link-dash>
 
+        <x-nav-link-dash href="/dashboard/media" icon="6" wire:navigate active="{{ request()->is('dashboard/media') ? 'active' : '' }}">
+            Media
+        </x-nav-link-dash>
+
+        <x-nav-link-dash href="/dashboard/jobs" icon="2" wire:navigate active="{{ request()->is('dashboard/jobs') ? 'active' : '' }}">
+            Jobs
+        </x-nav-link-dash>
+
         <div class="relative">
             @php
                 $isPostsActive = request()->is(

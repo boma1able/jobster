@@ -4,7 +4,6 @@ use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\JobController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RegisterUserController;
 use App\Http\Controllers\SessionController;
@@ -12,6 +11,9 @@ use App\Http\Controllers\TaxonomyCatController;
 use App\Http\Controllers\TaxonomyTagController;
 use App\Livewire\Dashboard\Categories;
 use App\Livewire\Dashboard\Comments\Comments;
+use App\Livewire\Dashboard\Jobs\ManageJob;
+use App\Livewire\Dashboard\Jobs\Jobs;
+use App\Livewire\Dashboard\MediaLibrary;
 use App\Livewire\Dashboard\Posts;
 use App\Livewire\Dashboard\Tags;
 use App\Livewire\Dashboard\Users\CreateUser;
@@ -43,9 +45,12 @@ Route::middleware(['auth', 'not-subscriber', UpdateLastActive::class])->prefix('
     Route::get('/users/{user}/edit', EditUser::class)->name('users.edit');
     Route::get('/users/create', CreateUser::class)->name('users.create');
 
-    Route::get('/jobs', [JobController::class, 'index'])->name('jobs');
+    Route::get('/jobs', Jobs::class)->name('jobs');
+    Route::get('/jobs/manage', ManageJob::class)->name('jobs.manage');
 
     Route::get('/user/{id}', [ProfileController::class, 'show'])->name('profile.show');
+
+    Route::get('/media', MediaLibrary::class)->name('media-library');
 });
 
 
