@@ -3,9 +3,13 @@
 namespace App\Providers;
 
 use App\Models\Comment;
+use App\Models\Job;
+use App\Observers\JobObserver;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\View;
 use App\Models\User;
+use App\Models\Post;
+use App\Observers\PostObserver;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -30,5 +34,8 @@ class AppServiceProvider extends ServiceProvider
 
         $approvedCommentsCount = Comment::where('approved', true)->count();
         View::share('approvedCommentsCount', $approvedCommentsCount > 0 ? $approvedCommentsCount : 0);
+
+        Post::observe(PostObserver::class);
+        Job::observe(JobObserver::class);
     }
 }
