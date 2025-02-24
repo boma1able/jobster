@@ -16,10 +16,10 @@ class Posts extends Component
     use WithPagination;
     use WithFileUploads;
 
-    public $title, $slug, $content, $postId, $userId, $categories, $selectedCategories = [], $tags = [], $featured_obj;
+    public $title, $slug, $content, $postId, $userId, $categories, $selectedCategories = [], $tags = [] ;
     public $isEditing = false;
     public $isCreating = false;
-    public $featured_img = '';
+    public $featured_img = '', $featured_obj;
     public $tag = '';
 
     public $showDeleteConfirmation = false;
@@ -27,11 +27,28 @@ class Posts extends Component
     public $modal_title = 'Deleting post!';
     public $sub = 'Are you sure you want to delete this post?';
 
+    public $sortColumn = 'created_at';
+    public $sortDirection = 'desc';
+
     public function mount(Post $post)
     {
         $this->post = $post;
         $this->categories = Category::latest()->get();
         $this->tags = [];
+    }
+
+    public function sortBy($column)
+    {
+        if ($this->sortColumn === $column) {
+            // Якщо колонка вже вибрана, перемикаємо напрямок
+            $this->sortDirection = $this->sortDirection === 'desc' ? 'asc' : 'desc';
+        } else {
+            // Якщо вибираємо нову колонку, встановлюємо дефолтний напрямок
+            $this->sortColumn = $column;
+            $this->sortDirection = 'asc';
+        }
+        // Скидання номера сторінки після зміни сортування
+        $this->resetPage();
     }
 
     public function quill_value_updated($value){
@@ -175,8 +192,11 @@ class Posts extends Component
 
     public function render()
     {
+        $posts = Post::orderBy($this->sortColumn, $this->sortDirection)
+            ->paginate(5);
+
         return view('livewire.dashboard.posts', [
-            'posts' => Post::latest()->paginate(5)
+            'posts' => $posts
         ]);
     }
 }
