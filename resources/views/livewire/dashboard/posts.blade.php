@@ -51,6 +51,7 @@
                                 <x-form.field>
 
                                     <div class="mt-4">
+
                                         <textarea name="content" id="content" wire:model="content" rows="6" class="w-full resize-none rounded-md py-1.5 px-3 text-sm overflow-hidden" placeholder="Add content"/></textarea>
                                         @error('content') <span class="text-red-500">{{ $message }}</span> @enderror
                                     </div>
@@ -198,18 +199,19 @@
                                     <table class="min-w-full table-auto">
                                         <thead class="bg-gray-50">
                                         <tr>
-                                            <th class="px-4 py-3 text-left text-xxs font-medium text-gray-700 uppercase">Author</th>
-                                            <th class="px-4 py-3 text-left text-xxs font-medium text-gray-700 uppercase">Title</th>
-                                            <th class="px-4 py-3 text-left text-xxs font-medium text-gray-700 uppercase">Categories</th>
-                                            <th class="px-4 py-3 text-left text-xxs font-medium text-gray-700 uppercase">Tags</th>
+                                            <th class="px-4 py-3 text-left text-xxs font-medium text-gray-700 uppercase text-center">Author</th>
+                                            <th class="px-4 py-3 text-left text-xxs font-medium text-gray-700 uppercase text-center">Title</th>
+                                            <th class="px-4 py-3 text-left text-xxs font-medium text-gray-700 uppercase text-center">Categories</th>
+                                            <th class="px-4 py-3 text-left text-xxs font-medium text-gray-700 uppercase text-center">Tags</th>
+                                            <th class="px-4 py-3 text-left text-xxs font-medium text-gray-700 uppercase text-center">Views</th>
                                             <th class="px-4 py-3 text-left text-xxs font-medium text-gray-700 uppercase text-center">Comments</th>
-                                            <th class="px-4 py-3 text-left text-xxs font-medium text-gray-700 uppercase">Date</th>
+                                            <th class="px-4 py-3 text-left text-xxs font-medium text-gray-700 uppercase text-center">Date</th>
                                         </tr>
                                         </thead>
                                         <tbody class="bg-white divide-y divide-gray-200">
                                             @foreach($posts as $post)
                                                 <tr>
-                                                    <td class="px-4 py-4 text-xs text-gray-500 min-w-0 w-[150px]">{{ $post->author_name }}</td>
+                                                    <td class="px-4 py-4 text-xs text-gray-500 min-w-0 w-[150px] text-center">{{ $post->author_name }}</td>
                                                     <td class="px-4 py-4 text-sm text-gray-500 min-w-0 w-[300px]">
                                                         <a href="{{ url('blog') . '/' . $post->slug }}" class="font-semibold hover:underline">{{ $post->title }}</a>
                                                         <span class="flex flex-wrap mt-2 space-x-3">
@@ -217,13 +219,16 @@
                                                             <a href="#" wire:click.prevent="confirmDelete({{ $post->id }})" class="text-red-400 text-xxs">Delete</a>
                                                         </span>
                                                     </td>
-                                                    <td class="px-4 py-4 text-xxs font-medium text-gray-500 min-w-[107px]">
-                                                        {{ $post->categories->pluck('name')->join(', ') }}
+                                                    <td class="px-4 py-4 text-xxs font-medium text-gray-500 min-w-[107px] text-center">
+                                                        {{ $post->categories->isNotEmpty() ? $post->categories->pluck('name')->join(', ') : '-' }}
                                                     </td>
-                                                    <td class="px-4 py-4 text-xxs font-medium text-gray-500 min-w-[107px]">
-                                                        {{ $post->tags->pluck('name')->join(', ') }}
+                                                    <td class="px-4 py-4 text-xxs font-medium text-gray-500 min-w-[107px] text-center">
+                                                        {{ $post->tags->isNotEmpty() ? $post->tags->pluck('name')->join(', ') : '-' }}
                                                     </td>
                                                     <td class="px-4 py-4 text-xxs font-medium text-gray-500">
+                                                        <span class="block text-center">{{ $post->unique_views }}</span>
+                                                    </td>
+                                                    <td class="px-4 py-4 text-xxs font-medium text-gray-500 text-center">
                                                         <a href="{{ url('blog') . '/' . $post->slug }}" class="flex justify-center relative">
                                                             <span class="absolute top-[4px]">{{ $post->comments->where('approved', true)->count() }}</span>
                                                             <span class="w-[30px]">
@@ -233,7 +238,7 @@
                                                             </span>
                                                         </a>
                                                     </td>
-                                                    <td class="px-4 py-4 text-xxs font-medium text-gray-400 min-w-[107px]">
+                                                    <td class="px-4 py-4 text-xxs font-medium text-gray-400 min-w-[107px] text-center">
                                                         {{ $post->created_at->format('d/m/y \a\t h:i a') }}
                                                     </td>
                                                 </tr>

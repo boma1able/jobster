@@ -9,6 +9,19 @@
                     <img src="{{ asset('storage/media/' . ($post->featured_img ?? 'default-avatar.jpg')) }}" class="w-full h-full object-cover" alt="">
                 </div>
 
+                @if(Route::is('blog.show'))
+                    @php
+                        $cookieKey = "viewed_post_{$post->id}";
+                    @endphp
+
+                    @if(!request()->hasCookie($cookieKey))
+                        @php
+                            $post->increment('unique_views');
+                            cookie()->queue($cookieKey, true, 60 * 24);
+                        @endphp
+                    @endif
+                @endif
+
                 <div class="px-10 pt-8">
                     <div class="text-xxs mb-4 text-gray-400">
                         @foreach($post->categories as $category)

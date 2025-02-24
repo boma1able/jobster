@@ -12,7 +12,7 @@
 
             <x-form.field>
 
-                <x-form.label>Name</x-form.label>
+                <x-form.label class="!text-gray-400 !text-xs">Name</x-form.label>
 
                 <input type="text" id="name" wire:model="name" class="border rounded p-2 w-full" />
 
@@ -22,7 +22,7 @@
 
             <x-form.field>
 
-                <x-form.label>Email</x-form.label>
+                <x-form.label class="!text-gray-400 !text-xs">Email</x-form.label>
 
                 <input type="email" id="email" wire:model="email" class="border rounded p-2 w-full" />
                 @error('email') <span class="text-red-500">{{ $message }}</span> @enderror
@@ -31,7 +31,7 @@
 
             <x-form.field>
 
-                <x-form.label>Role</x-form.label>
+                <x-form.label class="!text-gray-400 !text-xs">Role</x-form.label>
 
                 <select wire:model="role" class="block pl-3 w-[100%] bg-white min-w-0 grow py-2.5 pr-3 text-base text-gray-900 placeholder:text-gray-400 focus:outline-none sm:text-sm/6" required>
                     <option value="" selected disabled>Select Role</option>
@@ -46,7 +46,7 @@
 
             <x-form.field>
 
-                <x-form.label>Password</x-form.label>
+                <x-form.label class="!text-gray-400 !text-xs">Password</x-form.label>
 
                 <input type="password" id="password" wire:model="password" class="border rounded p-2 w-full" />
                 @error('password') <span class="text-red-500">{{ $message }}</span> @enderror

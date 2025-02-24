@@ -20,23 +20,11 @@
         {{ $slot }}
     </div>
 
-    <x-dashboard.modal.modal>
-
-        <x-slot:title>
-            Delete!
-        </x-slot:title>
-
-        <x-slot:sub>
-            Are you sure you want to delete this post? All of your data will be permanently removed. This action cannot be undone.
-        </x-slot:sub>
-
-    </x-dashboard.modal.modal>
-
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 
+
 </div>
 @livewireScripts
-
 </body>
 </html>

@@ -50,12 +50,10 @@
                 <table class="min-w-full table-auto">
                     <thead class="bg-gray-50">
                     <tr>
-                        <th class="px-2 py-3 text-left text-xxs font-medium text-gray-700 uppercase">Name</th>
-                        <th class="px-2 py-3 text-left text-xxs font-medium text-gray-700 uppercase">Description</th>
-                        <th class="px-2 py-3 text-left text-xxs font-medium text-gray-700 uppercase">Slug</th>
-                        <th class="px-2 py-3 text-left text-xxs font-medium text-gray-700 uppercase">
-                            <p class="flex justify-center">Count</p>
-                        </th>
+                        <th class="px-2 py-3 text-left text-xxs font-medium text-gray-700 uppercase text-center">Name</th>
+                        <th class="px-2 py-3 text-left text-xxs font-medium text-gray-700 uppercase text-center">Description</th>
+                        <th class="px-2 py-3 text-left text-xxs font-medium text-gray-700 uppercase text-center">Slug</th>
+                        <th class="px-2 py-3 text-left text-xxs font-medium text-gray-700 uppercase text-center">Count</th>
                     </tr>
                     </thead>
                     <tbody class="bg-white divide-y divide-gray-200">
@@ -68,11 +66,11 @@
                                     <button wire:click="delete({{ $tag->id }})" class="text-xxs text-red-400">Delete</button>
                                 </div>
                             </td>
-                            <td class="p-4 text-sm text-gray-500 min-w-0 w-[300px] text-xs">
-                                {{ \Str::limit(strip_tags($tag->description), 50) }}
+                            <td class="p-4 text-sm text-gray-500 min-w-0 w-[300px] text-xs {{ empty($tag->description) ? 'text-center' : '' }}">
+                                {{ \Str::limit(strip_tags($tag->description ? $tag->description : '-'), 50) }}
                             </td>
-                            <td class="p-4 text-xs font-medium text-gray-500 min-w-[107px]">{{ $tag->slug }}</td>
-                            <td class="p-4 text-xs font-medium text-gray-500 min-w-[107px]">
+                            <td class="p-4 text-xs font-medium text-gray-500 min-w-[107px] text-center">{{ $tag->slug }}</td>
+                            <td class="p-4 text-xs font-medium text-gray-500 min-w-[107px] text-center">
                                 <p class="flex justify-center">
                                     <a href="{{ url('/' . $tag->slug)}}" class="hover:text-black hover:underline">{{ $tag->posts()->count() }}</a>
                                 </p>

@@ -47,7 +47,7 @@
                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                         <a href="{{ route('dashboard.profile.show', $user->id) }}"
                            class="flex items-center hover:text-black transition-colors duration-300">
-                            <span class="w-10 h-10 overflow-hidden rounded-full mr-3 border border-gray-200 hover:border-gray-300 transition-all duration-500">
+                            <span class="w-10 h-10 overflow-hidden rounded-full mr-3 hover:border-gray-300 transition-all duration-500">
                                 <img src="{{ $user->avatar ? asset('storage/' . $user->avatar) : asset('/storage/default-avatar.jpg') }}" alt="User Avatar"
                                      class="w-full h-full object-cover transition-transform duration-500 hover:scale-110">
                             </span>

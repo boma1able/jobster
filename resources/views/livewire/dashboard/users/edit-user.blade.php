@@ -46,6 +46,15 @@
                 </x-form.field>
             @endif
 
+            <x-form.field>
+
+                <x-form.label class="!text-gray-400 !text-xs">Password</x-form.label>
+
+                <input type="password" id="password" wire:model="password" class="border rounded p-2 w-full" />
+                @error('password') <span class="text-red-500">{{ $message }}</span> @enderror
+
+            </x-form.field>
+
             <button class="mt-5 bg-green-500 text-white p-2 rounded">Update</button>
         </form>
     </div>

@@ -3,7 +3,6 @@
 use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\BlogController;
-use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RegisterUserController;
 use App\Http\Controllers\SessionController;
@@ -11,6 +10,7 @@ use App\Http\Controllers\TaxonomyCatController;
 use App\Http\Controllers\TaxonomyTagController;
 use App\Livewire\Dashboard\Categories;
 use App\Livewire\Dashboard\Comments\Comments;
+use App\Livewire\Dashboard\Dashboard;
 use App\Livewire\Dashboard\Jobs\ManageJob;
 use App\Livewire\Dashboard\Jobs\Jobs;
 use App\Livewire\Dashboard\MediaLibrary;
@@ -34,7 +34,7 @@ Route::get('/', function () {
 
 Route::middleware(['auth', 'not-subscriber', UpdateLastActive::class])->prefix('dashboard')->name('dashboard.')->group(function () {
 
-    Route::get('/', [DashboardController::class, 'index'])->name('index');
+    Route::get('/', Dashboard::class)->name('dashboard');
 
     Route::get('/posts', Posts::class)->name('posts');
     Route::get('/categories', Categories::class)->name('categories');

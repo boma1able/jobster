@@ -34,6 +34,10 @@ class Posts extends Component
         $this->tags = [];
     }
 
+    public function quill_value_updated($value){
+        $this->content = $value;
+    }
+
     public function removeImage()
     {
         $this->featured_img = null;

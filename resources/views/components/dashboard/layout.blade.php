@@ -21,21 +21,6 @@
         {{ $slot }}
     </div>
 
-    <x-dashboard.modal.modal>
-
-        <x-slot:title>
-            Delete!
-        </x-slot:title>
-
-        <x-slot:sub>
-            Are you sure you want to delete this post? All of your data will be permanently removed. This action cannot be undone.
-        </x-slot:sub>
-
-    </x-dashboard.modal.modal>
-
-
-
-
 </div>
 @livewireScripts
 
