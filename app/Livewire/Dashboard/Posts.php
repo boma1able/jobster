@@ -40,14 +40,12 @@ class Posts extends Component
     public function sortBy($column)
     {
         if ($this->sortColumn === $column) {
-            // Якщо колонка вже вибрана, перемикаємо напрямок
             $this->sortDirection = $this->sortDirection === 'desc' ? 'asc' : 'desc';
         } else {
-            // Якщо вибираємо нову колонку, встановлюємо дефолтний напрямок
             $this->sortColumn = $column;
             $this->sortDirection = 'asc';
         }
-        // Скидання номера сторінки після зміни сортування
+        
         $this->resetPage();
     }
 
