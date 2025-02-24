@@ -3,6 +3,7 @@
 use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\BlogController;
+use App\Http\Controllers\JobsController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RegisterUserController;
 use App\Http\Controllers\SessionController;
@@ -74,6 +75,9 @@ Route::get('/blog', [BlogController::class, 'index']);
 Route::get('/blog/{slug}', [BlogController::class, 'show'])->name('blog.show');
 Route::get('category/{category:slug}', [TaxonomyCatController::class, 'show'])->name('category');
 Route::get('tag/{tag:slug}', [TaxonomyTagController::class, 'show'])->name('tag');
+
+Route::get('/jobs', [JobsController::class, 'index']);
+Route::get('/jobs/{job:id}', [JobsController::class, 'show'])->name('jobs.show');
 
 Route::get('/register', [RegisterUserController::class, 'create']);
 Route::post('/register', [RegisterUserController::class, 'store']);

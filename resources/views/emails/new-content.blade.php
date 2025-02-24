@@ -42,8 +42,17 @@
     <h1>New {{ ucfirst($type) }} Available</h1>
     <p>{{ $content->title }}</p>
     <p>Click the link below to read more:</p>
-    <a href="{{ route('blog.show', $content->slug) }}">View {{ ucfirst($type) }}</a>
+    @php
+        $url = ($type == 'post' && isset($content->slug))
+            ? route('blog.show', $content->slug)
+            : (($type == 'job' && isset($content->id))
+                ? route('jobs.show', $content->id)
+                : '#');
+    @endphp
 
+    <a href="{{ $url }}">
+        View {{ ucfirst($type) }}
+    </a>
 </div>
 </body>
 </html>
