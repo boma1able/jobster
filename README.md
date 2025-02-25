@@ -1,66 +1,168 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Jobster
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+**Jobster** is a learning project built with Laravel, utilizing **Livewire** and **Tailwind CSS**. The project focuses on the admin panel that allows content management.
 
-## About Laravel
+---
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## Table of Contents
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+- [Structure and Functionality](#structure-and-functionality)
+  - [Main Pages](#main-pages)
+  - [Commenting System](#commenting-system)
+  - [Category and Tag Pages](#category-and-tag-pages)
+  - [Jobs and Vacancies](#jobs-and-vacancies)
+  - [Authentication and Users](#authentication-and-users)
+  - [Footer and Subscription](#footer-and-subscription)
+- [Admin Panel](#admin-panel)
+  - [Dashboard](#dashboard)
+  - [Media](#media)
+  - [Posts and Categories](#posts-and-categories)
+  - [Jobs](#jobs)
+  - [Comments](#comments)
+  - [Users](#users)
+- [Authentication and Roles](#authentication-and-roles)
+- [Additional Functionality](#additional-functionality)
+- [404 Page](#404-page)
+- [Technologies](#technologies)
+- [Setup and Installation](#setup-and-installation)
+- [License](#license)
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+---
 
-## Learning Laravel
+## Structure and Functionality
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+### Main Pages
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+- **Home Page**
+- **Blog Page**
+- **Job Page**
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+### Commenting System
 
-## Laravel Sponsors
+On the individual post page, the following features are implemented:
+- A commenting system.
+- A list of comments.
+- A form to leave a comment (available only to registered users – **Subscribers**).
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+### Category and Tag Pages
 
-### Premium Partners
+- **Category Pages:** Display posts that belong to the selected category.
+- **Tag Pages:** Display posts associated with a specific tag.
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+### Jobs and Vacancies
 
-## Contributing
+- **Jobs Page:** A list of jobs.
+  - Includes a link to the vacancy page.
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+### Authentication and Users
 
-## Code of Conduct
+- **Registration:** A form to register a new user.
+- **Login/Logout:**
+  - A login form, where by default a user is created with the **Subscriber** role.
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+### Footer and Subscription
 
-## Security Vulnerabilities
+- **Footer:** Contains a subscription form where the user can choose which newsletter to subscribe to: posts, vacancies.
+- Emails are sent to the user with links to new posts and jobs.
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+---
 
-## License
+## Admin Panel
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+Utilizes **Livewire** to build dynamic web applications without the need for traditional JavaScript frameworks (such as React or Vue.js).
+
+### Dashboard
+
+- A page that displays statistics:
+  - New posts.
+  - Jobs.
+  - Users.
+  - Comments.
+  - View counts.
+
+### Media
+
+- A page that displays media files (images) used in posts.
+
+### Posts and Categories
+
+- **Posts Page:**
+  - A table containing information about the author, title, description, categories, tags, views, comments, and publication date.
+  - Sorting options by date and view count.
+  - Functionality to create, edit, and delete posts.
+  
+- **Categories:**
+  - A list of existing categories including name, description, slug, and the number of posts that include the category.
+  - Ability to create new categories and edit existing ones.
+
+- **Tags:**
+  - A list of existing tags including name, description, slug, and the number of posts that include the tag.
+  - Ability to create new tags and edit existing ones.
+
+### Jobs
+
+- **Jobs Page:**
+  - Displays information about the job title, description, company, and company logo.
+  - A list of all jobs with filtering through search and pagination.
+  - Functionality to create a new job, edit, and delete existing ones.
+
+### Comments
+
+- A page that displays information:
+  - About the author, content, link to the post where the comment was added, and the publication date.
+- Functionality:
+  - **Approve/Reject** comments:
+    - By default, a comment is in a "pending" state and is not displayed on the post page.
+    - Comments from admins are automatically approved.
+  - Ability to edit or delete comments.
+  - Filtering options:
+    - All comments.
+    - Current user's comments.
+    - Pending (awaiting approval).
+    - Approved.
+
+### Users
+
+- A page that displays a list of all users with the following information:
+  - ID, name, email.
+  - Number of posts and jobs created by the user.
+  - User role (Admin, Editor, Subscriber, etc.).
+  - Status (user activity: online/offline).
+- Functionality:
+  - Create a new user.
+  - Edit and delete existing users.
+  - User profile page.
+
+---
+
+## Authentication and Roles
+
+- A user authentication system is implemented with role-based access.
+- A user with the **Subscriber** role (created by default during registration) does not have access to the admin panel (dashboard).
+- Password change functionality:
+  - "Forgot Password" page.
+  - Page to create a new password.
+
+---
+
+## Additional Functionality
+
+- **404 Page** to handle non-existent routes.
+
+---
+
+## Technologies
+
+- **Backend:** Laravel
+- **Dynamic Components:** Livewire
+- **Styling:** Tailwind CSS
+
+---
+
+## Setup and Installation
+
+1. **Clone the repository:**
+
+   ```bash
+   git clone https://github.com/yourusername/jobster.git
+   cd jobster
