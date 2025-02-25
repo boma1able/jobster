@@ -45,7 +45,7 @@ class Posts extends Component
             $this->sortColumn = $column;
             $this->sortDirection = 'asc';
         }
-        
+
         $this->resetPage();
     }
 
