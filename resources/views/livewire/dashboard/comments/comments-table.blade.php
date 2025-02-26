@@ -1,25 +1,29 @@
 <div>
-    <div class="flex space-x-4 text-xs text-gray-600">
-        <button wire:click="setFilter('all')"
-                class="border-r border-gray-400 pr-4 {{ $filter === 'all' ? 'text-blue-700' : '' }}">
-            All ({{ $counts['all'] }})
-        </button>
+    @if ($comments->count() > 0)
+        <div class="flex space-x-4 text-xs text-gray-600">
+            <button wire:click="setFilter('all')"
+                    class="border-r border-gray-400 pr-4 {{ $filter === 'all' ? 'text-blue-700' : '' }}">
+                All ({{ $counts['all'] }})
+            </button>
 
-        <button wire:click="setFilter('mine')"
-                class="border-r border-gray-400 pr-4 {{ $filter === 'mine' ? 'text-blue-700' : '' }}">
-            Mine ({{ $counts['mine'] }})
-        </button>
+            <button wire:click="setFilter('mine')"
+                    class="border-r border-gray-400 pr-4 {{ $filter === 'mine' ? 'text-blue-700' : '' }}">
+                Mine ({{ $counts['mine'] }})
+            </button>
 
-        <button wire:click="setFilter('pending')"
-                class="border-r border-gray-400 pr-4 {{ $filter === 'pending' ? 'text-blue-700' : '' }}">
-            Pending ({{ $counts['pending'] }})
-        </button>
+            <button wire:click="setFilter('pending')"
+                    class="border-r border-gray-400 pr-4 {{ $filter === 'pending' ? 'text-blue-700' : '' }}">
+                Pending ({{ $counts['pending'] }})
+            </button>
 
-        <button wire:click="setFilter('approved')"
-                class="{{ $filter === 'approved' ? 'text-blue-700' : '' }}">
-            Approved ({{ $counts['approved'] }})
-        </button>
-    </div>
+            <button wire:click="setFilter('approved')"
+                    class="{{ $filter === 'approved' ? 'text-blue-700' : '' }}">
+                Approved ({{ $counts['approved'] }})
+            </button>
+        </div>
+    @else
+        <p class="text-gray-500 mt-4">No comments available.</p>
+    @endif
 
     @if ($editingComment)
         <div class="my-8 bg-white rounded px-5 py-3 shadow">

@@ -61,9 +61,13 @@
 
                 @endforeach
 
-                <div class="flex w-full justify-center">
-                    <a href="/dashboard/comments" wire:navigate class="text-[10px] text-blue-500 underline font-light">Check all</a>
-                </div>
+                @if ($comments->count() > 0)
+                    <div class="flex w-full justify-center">
+                        <a href="/dashboard/comments" wire:navigate class="text-[10px] text-blue-500 underline font-light">Check all</a>
+                    </div>
+                @else
+                        <p class="text-blue-700 text-xxs font-light">No comments yet.</p>
+                @endif
             </div>
         </div>
 

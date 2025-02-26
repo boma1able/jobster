@@ -16,6 +16,32 @@
             Media
         </x-nav-link-dash>
 
+        <div class="relative">
+            @php
+                $isProductActive = request()->is(
+                    'dashboard/products*'
+                    );
+            @endphp
+
+            <x-nav-link-dash href="/dashboard/products" icon="7" wire:navigate active="{{ request()->is('dashboard/products', 'dashboard/products*') ? 'active' : '' }}">
+                Products
+            </x-nav-link-dash>
+
+            @if($isProductActive)
+                <div class="left-0 space-y-2 w-full bg-gray-700 pl-[36px]">
+                    <x-nav-child-link href="/dashboard/products" wire:navigate active="{{ request()->is('dashboard/products') ? 'active' : '' }}">
+                        Add new
+                    </x-nav-child-link>
+                    <x-nav-child-link href="/dashboard/products/categories" wire:navigate active="{{ request()->is('dashboard/products/categories') ? 'active' : '' }}">
+                        Categories
+                    </x-nav-child-link>
+                    <x-nav-child-link href="/dashboard/products/orders" wire:navigate active="{{ request()->is('dashboard/products/orders') ? 'active' : '' }}">
+                        Orders
+                    </x-nav-child-link>
+                </div>
+            @endif
+        </div>
+
         <x-nav-link-dash href="/dashboard/jobs" icon="2" wire:navigate active="{{ request()->is('dashboard/jobs') ? 'active' : '' }}">
             Jobs
         </x-nav-link-dash>

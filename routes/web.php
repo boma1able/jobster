@@ -9,6 +9,8 @@ use App\Http\Controllers\RegisterUserController;
 use App\Http\Controllers\SessionController;
 use App\Http\Controllers\TaxonomyCatController;
 use App\Http\Controllers\TaxonomyTagController;
+use App\Livewire\Cart;
+use App\Livewire\Checkout;
 use App\Livewire\Dashboard\Categories;
 use App\Livewire\Dashboard\Comments\Comments;
 use App\Livewire\Dashboard\Dashboard;
@@ -16,6 +18,9 @@ use App\Livewire\Dashboard\Jobs\ManageJob;
 use App\Livewire\Dashboard\Jobs\Jobs;
 use App\Livewire\Dashboard\MediaLibrary;
 use App\Livewire\Dashboard\Posts;
+use App\Livewire\Dashboard\Products\ManageProduct;
+use App\Livewire\Dashboard\Products\ProductCategories;
+use App\Livewire\Dashboard\Products\Products;
 use App\Livewire\Dashboard\Tags;
 use App\Livewire\Dashboard\Users\CreateUser;
 use App\Livewire\Dashboard\Users\EditUser;
@@ -52,9 +57,11 @@ Route::middleware(['auth', 'not-subscriber', UpdateLastActive::class])->prefix('
     Route::get('/user/{id}', [ProfileController::class, 'show'])->name('profile.show');
 
     Route::get('/media', MediaLibrary::class)->name('media');
+
+    Route::get('/products', Products::class);
+    Route::get('/products/manage/{id?}', ManageProduct::class)->name('products.manage');
+    Route::get('/products/categories', ProductCategories::class)->name('products.categories');
 });
-
-
 
 Route::middleware(['auth', CheckIfAdmin::class])->group(function () {
 //    Route::get('/dashboard/users/create', [UserController::class, 'create'])->name('dashboard.users.create');
@@ -91,4 +98,10 @@ Route::post('forgot-password', [ForgotPasswordController::class, 'sendResetLinkE
 
 Route::get('reset-password/{token}', [ResetPasswordController::class, 'showResetForm'])->name('password.reset');
 Route::post('reset-password', [ResetPasswordController::class, 'reset'])->name('password.update');
+
+Route::get('/shop', function (){
+    return view('shop.index');
+});
+Route::get('/cart', Cart::class);
+Route::get('/checkout', Checkout::class);
 

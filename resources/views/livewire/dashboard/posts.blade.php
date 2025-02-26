@@ -3,14 +3,14 @@
 
 
     @unless ($isCreating || $isEditing)
-        <x-ui-button-link wire:click="create" class="cursor-pointer">Add New</x-ui-button-link>
         <x-dashboard.page-title>
             <x-slot:title>
-                <div class="flex justify-between">
+                <div class="flex justify-between mb-5">
                     Posts
                 </div>
             </x-slot:title>
         </x-dashboard.page-title>
+        <x-ui-button-link wire:click="create" class="cursor-pointer">Add New</x-ui-button-link>
     @endunless
 
     @if (session()->has('message'))
