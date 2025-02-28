@@ -1,21 +1,24 @@
 <div>
+
     <div class="flex align-center justify-between">
 
         <a href="/dashboard/jobs/manage" wire:navigate  class="inline-block rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-xs">Add new</a>
 
-        <div class="relative flex align-center">
-            <input
-                type="text"
-                wire:model.live="query"
-                placeholder="Search for a job..."
-                class="block min-w-0 grow py-1.5 px-3 text-base text-gray-900 placeholder:text-gray-400 focus:outline-none sm:text-sm/6 font-light pr-10 border rounded"
-            >
-            <button wire:click="resetQuery" class="ml-2 absolute right-3 top-2.5 {{ $query ? 'text-gray-800' : 'text-white' }}">
-                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-                </svg>
-            </button>
-        </div>
+        @if ($jobs->count() > 0 || $query)
+            <div class="relative flex align-center">
+                <input
+                    type="text"
+                    wire:model.live="query"
+                    placeholder="Search for a job..."
+                    class="block min-w-0 grow py-1.5 px-3 text-base text-gray-900 placeholder:text-gray-400 focus:outline-none sm:text-sm/6 font-light pr-10 border rounded"
+                >
+                <button wire:click="resetQuery" class="ml-2 absolute right-3 top-2.5 {{ $query ? 'text-gray-800' : 'text-white' }}">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </button>
+            </div>
+        @endif
 
     </div>
 
@@ -48,7 +51,7 @@
                     </div>
                 </div>
             @empty
-                <div>Jobs not found!</div>
+                <p class="text-gray-500">No jobs available.</p>
             @endforelse
         </div>
     @endif

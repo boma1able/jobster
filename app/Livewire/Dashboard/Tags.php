@@ -37,7 +37,7 @@ class Tags extends Component
     public function store()
     {
         $this->validate([
-            'name' => 'required|unique:categories,name,' . $this->tagId,
+            'name' => 'required|unique:tags,name,' . $this->tagId,
             'description' => 'nullable|string'
         ]);
 

@@ -11,6 +11,7 @@ use Livewire\Features\SupportFileUploads\WithFileUploads;
 class ManageJob extends Component
 {
     use WithFileUploads;
+
     #[Url]
     public ?int $id = null;
 

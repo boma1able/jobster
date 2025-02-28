@@ -5,6 +5,7 @@ namespace App\Livewire\Dashboard;
 use App\Models\Category;
 use App\Models\Post;
 use App\Models\Tag;
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Livewire\Component;
@@ -33,7 +34,12 @@ class Posts extends Component
     public function mount(Post $post)
     {
         $this->post = $post;
-        $this->categories = Category::latest()->get();
+//      $this->categories = Category::latest()->get();
+        if (Schema::hasTable('categories')) {
+            $this->categories = Category::latest()->get();
+        } else {
+            $this->categories = collect();
+        }
         $this->tags = [];
     }
 

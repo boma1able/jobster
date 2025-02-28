@@ -10,7 +10,7 @@
                 </div>
             </x-slot:title>
         </x-dashboard.page-title>
-        <x-ui-button-link wire:click="create" class="cursor-pointer">Add New</x-ui-button-link>
+        <button wire:click="create" class="mb-5 inline-block rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-xs">Add new</button>
     @endunless
 
     @if (session()->has('message'))
@@ -186,49 +186,49 @@
         @else
             <div>
 
-                <div class="flex space-x-4 justify-end">
-                    <div class="text-xxs text-gray-500">Sorting by:</div>
-                    <div class="flex space-x-4">
-                        <button wire:click="sortBy('created_at')" class="flex text-gray-500 text-xxs">
-                            <span class="mr-1">Date</span>
-                            @if($sortColumn === 'created_at')
-                                @if($sortDirection === 'asc')
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
-                                        <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 17.25 12 21m0 0-3.75-3.75M12 21V3" />
-                                    </svg>
-                                @else
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4 rotate-180">
-                                        <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 17.25 12 21m0 0-3.75-3.75M12 21V3" />
-                                    </svg>
-                                @endif
-                            @else
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4 rotate-90">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 17.25 12 21m0 0-3.75-3.75M12 21V3" />
-                                </svg>
-                            @endif
-                        </button>
-                        <button wire:click="sortBy('unique_views')" class="flex text-gray-500 text-xxs">
-                            <span class="mr-1">Views</span>
-                            @if($sortColumn === 'unique_views')
-                                @if($sortDirection === 'asc')
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
-                                        <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 17.25 12 21m0 0-3.75-3.75M12 21V3" />
-                                    </svg>
-                                @else
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4 rotate-180">
-                                        <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 17.25 12 21m0 0-3.75-3.75M12 21V3" />
-                                    </svg>
-                                @endif
-                            @else
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4 rotate-90">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 17.25 12 21m0 0-3.75-3.75M12 21V3" />
-                                </svg>
-                            @endif
-                        </button>
-                    </div>
-                </div>
-
                 @if ($posts->count() > 0)
+                    <div class="flex space-x-4 justify-end">
+                        <div class="text-xxs text-gray-500">Sorting by:</div>
+                        <div class="flex space-x-4">
+                            <button wire:click="sortBy('created_at')" class="flex text-gray-500 text-xxs">
+                                <span class="mr-1">Date</span>
+                                @if($sortColumn === 'created_at')
+                                    @if($sortDirection === 'asc')
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 17.25 12 21m0 0-3.75-3.75M12 21V3" />
+                                        </svg>
+                                    @else
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4 rotate-180">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 17.25 12 21m0 0-3.75-3.75M12 21V3" />
+                                        </svg>
+                                    @endif
+                                @else
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4 rotate-90">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 17.25 12 21m0 0-3.75-3.75M12 21V3" />
+                                    </svg>
+                                @endif
+                            </button>
+                            <button wire:click="sortBy('unique_views')" class="flex text-gray-500 text-xxs">
+                                <span class="mr-1">Views</span>
+                                @if($sortColumn === 'unique_views')
+                                    @if($sortDirection === 'asc')
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 17.25 12 21m0 0-3.75-3.75M12 21V3" />
+                                        </svg>
+                                    @else
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4 rotate-180">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 17.25 12 21m0 0-3.75-3.75M12 21V3" />
+                                        </svg>
+                                    @endif
+                                @else
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4 rotate-90">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 17.25 12 21m0 0-3.75-3.75M12 21V3" />
+                                    </svg>
+                                @endif
+                            </button>
+                        </div>
+                    </div>
+
                     <div class="mt-6">
                         <div class="mb-5">
                             {{ $posts->links() }}

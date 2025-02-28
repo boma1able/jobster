@@ -27,7 +27,11 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        $user = User::first();
+        $user = null;
+
+        if (Schema::hasTable('users')) {
+            $user = User::first();
+        }
         View::share('user', $user ?? null);
 
         if (Schema::hasTable('comments')) {

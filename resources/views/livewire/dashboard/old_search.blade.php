@@ -19,7 +19,7 @@
                     @endif
                 </li>
             @empty
-                <li>Нічого не знайдено</li>
+                <li>Nothing to found!</li>
             @endforelse
         </ul>
     @endif

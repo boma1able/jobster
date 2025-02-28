@@ -44,9 +44,11 @@
                         <tbody class="bg-white divide-y divide-gray-200">
                         @foreach ($products as $product)
                             <tr>
-                                <td class="px-4 py-4 text-xs text-gray-500 min-w-0 w-[150px] text-center">img</td>
+                                <td class="px-4 py-4 text-xs text-gray-500 min-w-0 w-[150px] text-center">
+                                    <img src="{{ asset('storage/products/' . $product->image) }}" alt="" class="aspect-square max-w-[80px] w-full rounded-md bg-gray-200 object-cover m-auto">
+                                </td>
                                 <td class="px-4 py-4 text-sm text-gray-500 min-w-0 w-[300px]">
-                                    <a href="" class="font-semibold hover:underline">{{ $product->name }}</a>
+                                    <a href="{{ route('shop.show', $product->id) }}" class="font-semibold hover:underline">{{ $product->name }}</a>
                                     <span class="flex flex-wrap mt-2 space-x-3">
                                         <button wire:click="redirectToEdit({{ $product->id }})" class="text-gray-400 text-xxs">Edit</button>
                                         <a href="#" wire:click.prevent="delete({{ $product->id }})" class="text-red-400 text-xxs">Delete</a>

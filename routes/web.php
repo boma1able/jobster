@@ -7,10 +7,9 @@ use App\Http\Controllers\JobsController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RegisterUserController;
 use App\Http\Controllers\SessionController;
+use App\Http\Controllers\ShopController;
 use App\Http\Controllers\TaxonomyCatController;
 use App\Http\Controllers\TaxonomyTagController;
-use App\Livewire\Cart;
-use App\Livewire\Checkout;
 use App\Livewire\Dashboard\Categories;
 use App\Livewire\Dashboard\Comments\Comments;
 use App\Livewire\Dashboard\Dashboard;
@@ -28,6 +27,7 @@ use App\Http\Middleware\CheckIfAdmin;
 use App\Http\Middleware\CheckUserRole;
 use App\Http\Middleware\UpdateLastActive;
 use App\Livewire\Dashboard\Users\Users;
+use App\Livewire\Shop\Checkout;
 use App\Models\User;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Session;
@@ -99,9 +99,11 @@ Route::post('forgot-password', [ForgotPasswordController::class, 'sendResetLinkE
 Route::get('reset-password/{token}', [ResetPasswordController::class, 'showResetForm'])->name('password.reset');
 Route::post('reset-password', [ResetPasswordController::class, 'reset'])->name('password.update');
 
-Route::get('/shop', function (){
-    return view('shop.index');
-});
-Route::get('/cart', Cart::class);
+Route::get('/shop', [ShopController::class, 'index']);
+Route::get('/shop/{product}', [ShopController::class, 'show'])->name('shop.show');
+Route::get('/cart', function () {
+    $cart = session()->get('cart', []);
+    return view('shop.cart', compact('cart'));
+})->name('cart');
 Route::get('/checkout', Checkout::class);
 
