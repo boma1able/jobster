@@ -28,6 +28,8 @@ use App\Http\Middleware\CheckUserRole;
 use App\Http\Middleware\UpdateLastActive;
 use App\Livewire\Dashboard\Users\Users;
 use App\Livewire\Shop\Checkout;
+use App\Livewire\Shop\Orders;
+use App\Models\Order;
 use App\Models\User;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Session;
@@ -61,6 +63,7 @@ Route::middleware(['auth', 'not-subscriber', UpdateLastActive::class])->prefix('
     Route::get('/products', Products::class);
     Route::get('/products/manage/{id?}', ManageProduct::class)->name('products.manage');
     Route::get('/products/categories', ProductCategories::class)->name('products.categories');
+    Route::get('/products/orders', Orders::class)->name('products.orders');
 });
 
 Route::middleware(['auth', CheckIfAdmin::class])->group(function () {
@@ -105,5 +108,7 @@ Route::get('/cart', function () {
     $cart = session()->get('cart', []);
     return view('shop.cart', compact('cart'));
 })->name('cart');
-Route::get('/checkout', Checkout::class);
+Route::get('/checkout', function (){
+    return view('shop.checkout');
+});
 

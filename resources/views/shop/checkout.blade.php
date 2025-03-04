@@ -1,9 +1,9 @@
 <x-layout>
 
     <div class="bg-white">
-        <div class="pt-6">
+        <div class="p-6">
 
-            <livewire:shop.cart.cart />
+            <livewire:shop.checkout />
 
         </div>
     </div>

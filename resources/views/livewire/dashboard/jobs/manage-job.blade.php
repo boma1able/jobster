@@ -73,6 +73,10 @@
             @error('description') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
         </x-form.field>
 
+        <livewire:quill-text-editor
+            wire:model.live="description"
+            theme="bubble" />
+
         <div class="mt-6 flex items-center">
             <x-form.button type="submit" class="{{ $isEditing ? 'bg-green-500 hover:bg-green-400' : '' }}">
                 {{ $isEditing ? 'Update' : 'Add new' }}
@@ -82,3 +86,5 @@
         </div>
     </form>
 </div>
+
+

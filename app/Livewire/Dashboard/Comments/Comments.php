@@ -17,10 +17,10 @@ class Comments extends Component
 
     protected $queryString = ['search', 'user_comments', 'pending', 'approved'];
 
-    public function mount()
-    {
-        $this->comments = Comment::latest()->get();
-    }
+//    public function mount()
+//    {
+//        $this->comments = Comment::latest()->get();
+//    }
 
     public function render()
     {

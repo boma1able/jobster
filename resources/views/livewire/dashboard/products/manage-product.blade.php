@@ -44,7 +44,40 @@
                             <x-form.label class="text-xs mb-1">
                                 Description
                             </x-form.label>
-                            <textarea name="description" id="description" wire:model="description" rows="6" class="w-full resize-none rounded-md py-1.5 px-3 text-sm overflow-hidden"/></textarea>
+                            <textarea name="description" id="description" wire:model="description" rows="6" class="hidden w-full resize-none rounded-md py-1.5 px-3 text-sm overflow-hidden"/></textarea>
+                            <div class="mt-2 bg-white rounded-md" wire:ignore>
+                                <div
+                                    class="h-64"
+                                    x-data
+                                    x-ref="quillEditor"
+                                    x-init="
+                                        quill = new Quill($refs.quillEditor, {
+                                            theme: 'snow',
+                                            modules: {
+                                                toolbar: [
+                                                    [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
+                                                    ['bold', 'italic', 'underline'],
+                                                    [{ 'list': 'ordered' }, { 'list': 'bullet' }],
+                                                    [{ 'align': [] }],
+                                                    ['link', 'image', 'code-block'],
+                                                    ['clean']
+                                                ],
+                                                clipboard: {
+                                                    matchVisual: false
+                                                }
+                                            },
+                                            readOnly: false,
+                                        });
+
+                                        quill.on('text-change', function () {
+                                          $dispatch('quill-input', quill.root.innerHTML);
+                                        });
+                                      "
+                                            x-on:quill-input.window="$wire.set('description', $event.detail)"
+                                        >
+                                    {!! $description !!}
+                                </div>
+                            </div>
                             @error('description') <span class="text-red-500">{{ $message }}</span> @enderror
                         </div>
 

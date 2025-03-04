@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Shop;
 
+use App\Models\Product;
 use Illuminate\Support\Facades\Session;
 use Livewire\Component;
 
@@ -13,12 +14,21 @@ class AddToCartButton extends Component
     public function addToCart()
     {
         $cart = Session::get('cart', []);
+        $product = Product::find($this->productId);
+
+        if (!$product) {
+            return;
+        }
 
         if (isset($cart[$this->productId])) {
             $cart[$this->productId]['quantity'] += $this->quantity;
         } else {
             $cart[$this->productId] = [
                 'product_id' => $this->productId,
+                'name' => $product->name,
+                'price' => $product->price,
+                'image' => $product->image,
+                'description' => $product->description,
                 'quantity' => $this->quantity,
             ];
         }
@@ -27,6 +37,7 @@ class AddToCartButton extends Component
         $this->dispatch('cartUpdated');
         session()->flash('message', 'Product added to cart!');
     }
+
 
     public function render()
     {

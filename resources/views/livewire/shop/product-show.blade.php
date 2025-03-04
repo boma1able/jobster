@@ -29,7 +29,7 @@
 
             <p class="text-2xl mb-2">${{ $product->price }}</p>
 
-            <p class="text-gray-700 mb-4 text-gray-400">{{ $product->description }}</p>
+            <div class="text-gray-700 mb-4 text-gray-400">{!! $product->description !!}</div>
 
             <div class="flex justify-between items-center">
                 <livewire:shop.add-to-cart-button :productId="$product->id" />

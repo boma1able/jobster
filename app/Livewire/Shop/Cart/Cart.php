@@ -19,29 +19,37 @@ class Cart extends Component
     public function handleAddToCart($productId, $quantity)
     {
         $cart = session()->get('cart', []);
+        $product = Product::find($productId);
 
-        // Якщо товар вже є в кошику, збільшуємо кількість
+        if (!$product) {
+            return;
+        }
+
         if (isset($cart[$productId])) {
             $cart[$productId]['quantity'] += $quantity;
         } else {
             $cart[$productId] = [
                 'product_id' => $productId,
+                'name' => $product->name,
+                'price' => $product->price,
+                'image' => $product->image,
+                'description' => $product->description,
                 'quantity' => $quantity,
             ];
         }
 
-        // Оновлюємо кошик в сесії
         session()->put('cart', $cart);
-        $this->cart = session()->get('cart'); // Оновлюємо кошик з сесії
+        $this->cart = $cart;
     }
+
 
     public function getTotalAmount()
     {
         $total = 0;
 
         foreach ($this->cart as $item) {
-            $product = Product::find($item['product_id']); // знаходимо продукт за ID
-            $total += $product->price * $item['quantity']; // додаємо до загальної суми
+            $product = Product::find($item['product_id']);
+            $total += $product->price * $item['quantity'];
         }
 
         return $total;
@@ -49,11 +57,9 @@ class Cart extends Component
 
     public function removeItem($productId)
     {
-        // Видаляємо товар з кошика за ID
         $cart = session()->get('cart', []);
         unset($cart[$productId]);
 
-        // Оновлюємо кошик в сесії
         session()->put('cart', $cart);
         $this->cart = session()->get('cart');
         $this->dispatch('cartUpdated');

@@ -9,8 +9,12 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.snow.css" rel="stylesheet" />
 
     @livewireStyles
+
+    @yield('styles')
+
 </head>
 <body class="bg-gray-100">
 <div class="flex">
@@ -26,5 +30,8 @@
 
 </div>
 @livewireScripts
+@yield('scripts')
+
+<script src="https://cdn.quilljs.com/1.3.6/quill.min.js"></script>
 </body>
 </html>

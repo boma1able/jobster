@@ -126,3 +126,16 @@
 .comments-table .unapprove .comment-text{
     font-weight: 700;
 }
+
+.ql-toolbar.ql-snow,
+.ql-toolbar.ql-snow + .ql-container.ql-snow{
+    border: unset!important;
+}
+
+.ql-toolbar.ql-snow + .ql-container.ql-snow{
+    border-top: 1px solid #e0e0e0 !important;
+}
+
+.ql-editor{
+    outline: none!important;
+}

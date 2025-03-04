@@ -79,11 +79,17 @@ class CommentsTable extends Component
 
     private function updateCounts()
     {
+        $query = Comment::all();
+        $all = $query->count();
+        $mine = $query->where('user_id', auth()->id())->count();
+        $pending =  $query->where('approved', false)->count();
+        $approved =  $query->where('approved', true)->count();
+
         $this->counts = [
-            'all' => Comment::count(),
-            'mine' => Comment::where('user_id', auth()->id())->count(),
-            'pending' => Comment::where('approved', false)->count(),
-            'approved' => Comment::where('approved', true)->count(),
+            'all' => $all,
+            'mine' => $mine,
+            'pending' => $pending,
+            'approved' => $approved,
         ];
     }
 
@@ -99,15 +105,17 @@ class CommentsTable extends Component
 
     public function render()
     {
-        $query = Comment::with('user', 'post')->latest();
-
-        if ($this->filter === 'mine') {
-            $query->where('user_id', auth()->id());
-        } elseif ($this->filter === 'pending') {
-            $query->where('approved', false);
-        } elseif ($this->filter === 'approved') {
-            $query->where('approved', true);
-        }
+        $query = Comment::with('user', 'post')
+            ->when($this->filter === 'mine', function ($query){
+                return $query->where('user_id', auth()->id());
+            })
+            ->when($this->filter === 'pending', function ($query){
+                return $query->where('approved', false);
+            })
+            ->when($this->filter === 'approved', function ($query){
+                return  $query->where('approved', true);
+            })
+            ->latest();
 
         return view('livewire.dashboard.comments.comments-table', [
             'comments' => $query->paginate(10),

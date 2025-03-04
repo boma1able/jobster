@@ -2,20 +2,21 @@
 
 namespace App\Livewire\Dashboard\Products;
 
+use App\Livewire\Dashboard\Products\ProductQuillEditor;
 use App\Models\Product;
 use App\Models\ProductCategory;
 use Illuminate\Support\Facades\Storage;
 use Livewire\Component;
 use Livewire\Features\SupportFileUploads\WithFileUploads;
 
+
 class ManageProduct extends Component
 {
     use WithFileUploads;
 
     public ?int $id = null;
-    public $name, $price, $description, $selectedCategories = [], $product_img, $product_obj_img = '';
+    public $name, $price, $description = '', $selectedCategories = [], $product_img, $product_obj_img = '';
     public $isEditing = false;
-
 
     public function mount($id = null)
     {
@@ -44,6 +45,7 @@ class ManageProduct extends Component
 
     public function store()
     {
+
         $this->validate([
             'name'              => 'required|min:2',
             'price'             => 'required|numeric|min:0',
@@ -105,6 +107,7 @@ class ManageProduct extends Component
     {
         return view('livewire.dashboard.products.manage-product', [
             'product_categories' => ProductCategory::all(),
+            'description' => $this->description,
         ]);
     }
 }

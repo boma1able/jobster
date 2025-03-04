@@ -1,6 +1,7 @@
 <?php
 namespace App\Livewire\Dashboard\Comments;
 
+use App\Models\Comment;
 use App\Models\Post;
 use Livewire\Component;
 
@@ -9,6 +10,8 @@ class PostComments extends Component
     public $slug;
     public $content = '';
     public $successMessage = '';
+    public $comments;
+    public $post;
 
     protected $rules = [
         'content' => 'required|string|max:1000',
@@ -17,13 +20,18 @@ class PostComments extends Component
     public function mount($slug)
     {
         $this->slug = $slug;
+
+        $this->post = Post::whereSlug($this->slug)->firstOrFail();
+
+//      $this->comments = $post->comments()->where('approved', true)->latest()->get();
+        $this->comments = $this->post->comments()->whereAproved(true)->latest()->get();
     }
 
     public function submitComment()
     {
         $this->validate();
 
-        $post = Post::where('slug', $this->slug)->firstOrFail();
+        $post = Post::whereSlug($this->slug)->firstOrFail();
 
         $post->comments()->create([
             'content' => $this->content,
@@ -38,13 +46,7 @@ class PostComments extends Component
 
     public function render()
     {
-        $post = Post::where('slug', $this->slug)->firstOrFail();
-        $comments = $post->comments()->where('approved', true)->latest()->get();
-
-        return view('livewire.dashboard.comments.post-comments', [
-            'comments' => $comments,
-            'post' => $post,
-        ]);
+        return view('livewire.dashboard.comments.post-comments');
     }
 }
 
